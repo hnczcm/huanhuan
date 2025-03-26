@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢欢的小世界 | 旅行 · 生活 · 梦想</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff9f9;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #e67e7e;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: #d35454;
+        }
+        
+        /* 导航栏 */
+        header {
+            background: linear-gradient(135deg, #ffd3d3, #ffb7b7);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #f8e1e1;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #e67e7e;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e67e7e;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #d35454;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 关于我 */
+        .about {
+            padding: 5rem 0;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #e67e7e;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ffb7b7;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #e67e7e;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 10px solid #ffd3d3;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 旅行足迹 */
+        .travel {
+            padding: 5rem 0;
+            background-color: #fff9f9;
+        }
+        
+        .travel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .travel-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .travel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .travel-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .travel-card-content {
+            padding: 1.5rem;
+        }
+        
+        .travel-card h3 {
+            color: #e67e7e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .travel-card .date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* 博客文章 */
+        .blog {
+            padding: 5rem 0;
+            background-color: #fff;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .blog-card {
+            background-color: #fff9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-card h3 {
+            color: #e67e7e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-card .date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-card .excerpt {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 联系我 */
+        .contact {
+            padding: 5rem 0;
+            background-color: #fff9f9;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #e67e7e;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(230, 126, 126, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, #ffd3d3, #ffb7b7);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links li {
+            margin: 0 1rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            color: #e67e7e;
+            border-radius: 50%;
+            line-height: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background-color: #e67e7e;
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* 小装饰元素 */
+        .heart {
+            color: #e67e7e;
+            font-size: 1.2em;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #888;
+            border-left: 3px solid #ffb7b7;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">欢欢<span>的小世界</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#travel">旅行足迹</a></li>
+                    <li><a href="#blog">生活随笔</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>你好，我是何欢欢</h1>
+            <p>一个热爱生活、向往远方的女孩，用脚步丈量世界，用文字记录美好 <span class="heart">❤</span></p>
+            <a href="#about" class="btn">认识我</a>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于欢欢</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>嗨，很高兴遇见你 <span class="heart">❤</span></h3>
+                    <p>我是何欢欢，一个永远保持好奇心的女孩。喜欢在咖啡香中阅读，喜欢在阳光下写作，更喜欢拖着行李箱探索未知的远方。</p>
+                    <p>有人说我像只小鹿，总是蹦蹦跳跳充满活力；也有人说我像本书，安静时藏着许多故事。其实我就是我，一个时而文艺时而疯癫的普通女孩。</p>
+                    <p class="quote">"生活不是等待暴风雨过去，而是学会在雨中跳舞。" 这是我的座右铭，也是我一直努力实践的生活态度。</p>
+                    <p>目前我在一家制造业公司做着朝九晚五的工作，但我的心永远在计划下一次旅行。攒钱、规划、出发，这就是我的快乐循环。</p>
+                    <p>这个博客记录了我的旅行见闻、生活感悟和那些不期而遇的小确幸。希望能和你分享这个世界的温柔与美好。</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="何欢欢">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 旅行足迹 -->
+    <section class="travel" id="travel">
+        <div class="container">
+            <div class="section-title">
+                <h2>我的旅行足迹</h2>
+            </div>
+            <div class="travel-grid">
+                <div class="travel-card">
+                    <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="大理">
+                    <div class="travel-card-content">
+                        <h3>大理的风花雪月</h3>
+                        <div class="date">2023年9月</div>
+                        <p>在洱海边骑自行车，在古城里晒太阳，在苍山下喝咖啡...大理的慢生活让我找到了内心的平静。</p>
+                    </div>
+                </div>
+                <div class="travel-card">
+                    <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="西藏">
+                    <div class="travel-card-content">
+                        <h3>西藏的心灵之旅</h3>
+                        <div class="date">2022年9月</div>
+                        <p>站在布达拉宫前，看着虔诚的朝圣者，我第一次感受到了信仰的力量和生命的渺小。</p>
+                    </div>
+                </div>
+                <div class="travel-card">
+                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="日本">
+                    <div class="travel-card-content">
+                        <h3>日本的樱花季</h3>
+                        <div class="date">2022年4月</div>
+                        <p>追逐樱前线，从东京到京都，粉色的花瓣雨让我明白了什么是转瞬即逝的美好。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 博客文章 -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>生活随笔</h2>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="独处">
+                    <div class="blog-card-content">
+                        <h3>独处的艺术</h3>
+                        <div class="date">2023年6月15日</div>
+                        <p class="excerpt">学会与自己相处，是我二十多岁最重要的功课。一个人看电影，一个人吃火锅，一个人旅行...这些曾经让我害怕的事情，现在成了我最享受的时光。</p>
+                        <a href="#" class="btn">阅读更多</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1518481852452-9415b262eba4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="咖啡">
+                    <div class="blog-card-content">
+                        <h3>城市咖啡馆漫游指南</h3>
+                        <div class="date">2023年5月28日</div>
+                        <p class="excerpt">每到一个新城市，我都会寻找那些藏在巷子里的独立咖啡馆。它们就像城市的秘密花园，每一家都有独特的气质和故事。</p>
+                        <a href="#" class="btn">阅读更多</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="阅读">
+                    <div class="blog-card-content">
+                        <h3>我的年度书单分享</h3>
+                        <div class="date">2023年4月10日</div>
+                        <p class="excerpt">今年读过的32本书中，这5本最让我感动。它们像一扇扇窗，让我看到了不同的世界和人生。</p>
+                        <a href="#" class="btn">阅读更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系欢欢</h2>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">你的名字</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">电子邮箱</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">你想对我说的话</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">发送消息</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-weibo">微</i></a></li>
+                <li><a href="#"><i class="fab fa-weixin">信</i></a></li>
+                <li><a href="#"><i class="fab fa-instagram">图</i></a></li>
+                <li><a href="#"><i class="fab fa-xiaohongshu">书</i></a></li>
+            </ul>
+            <p>感谢你来到我的小世界 <span class="heart">❤</span></p>
+            <p class="copyright">© 2023 何欢欢的小世界. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <!-- Font Awesome 图标库 -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
